@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雲林元長子茂社區</title>
+    <style>
+        /* --- Global Styles --- */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif; /* Modern font */
+            line-height: 1.6;
+            background-color: #f0f8ff;
+            color: #000;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased; /* Smoother fonts */
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: min(90%, 1200px); /* Responsive width */
+            margin-inline: auto;
+        }
+
+        /* --- Header --- */
+        header {
+            position: relative;
+            /* 下一行是背景圖片的設定，您可以將 url(...) 中的網址替換成您自己的圖片連結或本地檔案路徑 */
+            background: linear-gradient(rgba(0, 188, 212, 0.7), rgba(0, 188, 212, 0.7)), url('https://cdn.pixabay.com/photo/2018/11/09/08/08/forest-3804001_1280.jpg');
+            background-size: cover; /* 使背景圖片完整覆蓋區域 */
+            background-position: center; /* 將圖片置中顯示 */
+            color: white;
+            padding: 5em 0;
+            text-align: center;
+            overflow: hidden;
+        }
+
+       
+
+        @keyframes wave {
+            0% {
+                transform: rotate(0deg) translate(-50%, -50%);
+            }
+
+            100% {
+                transform: rotate(360deg) translate(-50%, -50%);
+            }
+        }
+
+        header .container {
+            position: relative;
+            z-index: 1; /* Content above wave */
+        }
+
+        header h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem); /* Responsive heading */
+            font-weight: 700;
+            margin-bottom: 0.5em;
+            letter-spacing: 0.05em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            opacity: 0.9;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-block: 2em;
+            position: sticky; /* Sticky nav */
+            top: 0;
+            z-index: 10;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: space-around;
+            padding: 1em;
+        }
+
+        nav li {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        nav a {
+            display: block;
+            color: #00bcd4;
+            padding: 0.75em;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: white;
+            background-color: #00bcd4;
+            border-radius: 8px;
+        }
+
+        /* Underline animation (optional) */
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #00bcd4;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* --- Main Content --- */
+        main {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3em;
+            margin-bottom: 3em;
+        }
+
+        article {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        article:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        article .content {
+            padding: 1.5em;
+        }
+
+        article h2 {
+            font-size: 1.75rem;
+            color: #0097a7;
+            margin-bottom: 0.75em;
+            border-bottom: 2px solid #0097a7;
+            padding-bottom: 0.5em;
+        }
+
+        article p {
+            opacity: 0.8;
+        }
+
+        article img {
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 4px solid #00bcd4;
+        }
+
+        /* --- Aside --- */
+        aside {
+            background-color: #e0f7fa;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 1.5em;
+            grid-column: 1 / -1; /* Full width on small screens */
+        }
+
+        aside h2 {
+            font-size: 1.5rem;
+            color: #00838f;
+            margin-bottom: 1em;
+            border-bottom: 1px solid #00838f;
+            padding-bottom: 0.5em;
+        }
+
+        aside ul {
+            padding-left: 1.25em;
+        }
+
+        aside li {
+            margin-bottom: 0.6em;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #0097a7;
+            color: white;
+            text-align: center;
+            padding: 2em 0;
+            margin-top: 4em;
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1em;
+        }
+
+        footer p {
+            order: 1;
+        }
+
+        footer a {
+            color: white;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        footer a:hover {
+            opacity: 1;
+        }
+
+        /* --- Media Queries --- */
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+
+            footer .container {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>雲林元長子茂社區</h1>
+            <p>探索農業之鄉，體驗純樸之美</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="#" class="active">首頁</a></li>
+                <li><a href="#">社區導覽</a></li>
+                <li><a href="#">青蔥產業</a></li>
+                <li><a href="#">文化慶典</a></li>
+                <li><a href="#">美食住宿</a></li>
+                <li><a href="#">聯絡我們</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <article>
+                <img src="community_center.jpg" alt="子茂社區活動中心">
+                <div class="content">
+                    <h2>社區活動中心</h2>
+                    <p>
+                        子茂社區活動中心是社區的心臟，提供居民交流、學習和舉辦活動的場所。
+                        中心設備完善，定期舉辦各種課程和活動，豐富居民的生活。
+                    </p>
+                </div>
+            </article>
+
+            <article>
+                <img src="onion_fields.jpg" alt="青蔥田園">
+                <div class="content">
+                    <h2>青蔥田園</h2>
+                    <p>
+                        子茂社區以其廣袤的青蔥田園而聞名。肥沃的土壤和清新的空氣，
+                        孕育出高品質的青蔥，是社區主要的經濟作物。
+                    </p>
+                </div>
+            </article>
+
+            <article>
+                <img src="temple.jpg" alt="傳統廟宇">
+                <div class="content">
+                    <h2>傳統廟宇</h2>
+                    <p>
+                        社區內的傳統廟宇是居民信仰和文化的中心。
+                        精緻的建築和悠久的歷史，見證了社區的發展和變遷。
+                    </p>
+                </div>
+            </article>
+
+
+
+        </main>
+
+        <aside>
+            <section>
+                <h2>關於子茂社區</h2>
+                <p>
+                    子茂社區位於雲林縣元長鄉，是一個以農業為主的純樸社區。
+                    居民熱情好客，社區擁有豐富的自然資源和深厚的文化底蘊。<p>
+                    <p>
+                </p>
+            </section>
+            <section>
+                <h2> <br> <br> <br>合作夥伴 </h2>
+                <ul>
+                    <li>元長鄉公所</li>
+                    <li>雲林縣農會</li>
+                    <li>子茂社區發展協會</li>
+                </ul>
+            </section>
+        </aside>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2024 子茂社區發展協會</p>
+            <a href="#">回到頁首</a>
+        </div>
+    </footer>
+</body>
+
+</html>
